@@ -1,0 +1,91 @@
+### APDUReadICCID
+
+```golang
+// APDUReadICCID ...
+var APDUReadICCID = [][]byte{
+	{0xA0, 0xA4, 0x00, 0x00, 0x02, 0x3F, 0x00}, // Select MF
+	{0xA0, 0xA4, 0x00, 0x00, 0x02, 0x2F, 0xE2}, // Select ICCID EF
+	{0xA0, 0xB0, 0x00, 0x00, 0x0A},             // Read ICCID // 10 bytes
+}
+
+resp APDUReadICCID: 98 66 30 71 04 56 01 59 39 f5 00 00
+ICCID Decode : 89 66 03 17 40 65 10 95 93 5f 00 00
+```
+
+### APDUReadICCIDclass00
+
+```golang
+// APDUReadICCIDclass00 ...
+var APDUReadICCIDclass00 = [][]byte{
+	{0x00, 0xA4, 0x00, 0x04, 0x02, 0x3F, 0x00}, // Select MF
+	{0x00, 0xA4, 0x00, 0x04, 0x02, 0x2F, 0xE2}, // Select ICCID EF
+	{0x00, 0xB0, 0x00, 0x00, 0x0A},             // Read ICCID // 10
+}
+
+resp APDUReadICCIDclass00: 6E 00
+```
+
+### APDUReadIMSI
+
+```golang
+// APDUReadIMSI ...
+var APDUReadIMSI = [][]byte{
+	{0xA0, 0xA4, 0x00, 0x00, 0x02, 0x3F, 0x00}, // Select MF
+	{0xA0, 0xA4, 0x00, 0x00, 0x02, 0x7F, 0x20}, // Select GSM DF
+	{0xA0, 0xA4, 0x00, 0x00, 0x02, 0x6F, 0x07}, // Select IMSI EF
+	{0xA0, 0xB0, 0x00, 0x00, 0x09},             // Read IMSI // 9 bytes
+}
+
+resp APDUReadIMSI: 08 59 02 30 59 20 57 03 30 00 00
+IMSI Decode : 80 95 20 03 95 02 75 30 03 00 00
+```
+
+### APDUReadIMSIclass00
+
+```golang
+// APDUReadIMSIclass00 ...
+var APDUReadIMSIclass00 = [][]byte{
+	{0x00, 0xA4, 0x00, 0x04, 0x02, 0x3F, 0x00}, // Select MF
+	{0x00, 0xA4, 0x00, 0x04, 0x02, 0x7F, 0x20}, // Select GSM DF
+	{0x00, 0xA4, 0x00, 0x04, 0x02, 0x6F, 0x07}, // Select IMSI EF
+	{0x00, 0xB0, 0x00, 0x00, 0x09},             // Read IMSI // 9 bytes
+}
+
+resp APDUReadIMSIclass00: 6E 00
+```
+
+# Full debug
+
+```
+99999999 APDU: A0 A4 00 00 02 3F 00
+00244085 SW: 9F 17
+00000091 APDU: A0 A4 00 00 02 2F E2
+00020489 SW: 9F 0F
+00000076 APDU: A0 B0 00 00 0A
+00030696 SW: 98 66 30 71 04 56 01 59 39 F5 90 00
+
+00000107 APDU: 00 A4 00 04 02 3F 00
+00011483 SW: 6E 00
+00000067 APDU: 00 A4 00 04 02 2F E2
+00011389 SW: 6E 00
+00000069 APDU: 00 B0 00 00 0A
+00011448 SW: 6E 00
+
+00000188 APDU: A0 A4 00 00 02 3F 00
+00020171 SW: 9F 17
+00000148 APDU: A0 A4 00 00 02 7F 20
+00020458 SW: 9F 17
+00000072 APDU: A0 A4 00 00 02 6F 07
+00021586 SW: 9F 0F
+00000081 APDU: A0 B0 00 00 09
+00029386 SW: 08 59 02 30 59 20 57 03 30 90 00
+
+00000084 APDU: 00 A4 00 04 02 3F 00
+00011474 SW: 6E 00
+00000105 APDU: 00 A4 00 04 02 7F 20
+00011483 SW: 6E 00
+00000153 APDU: 00 A4 00 04 02 6F 07
+00011447 SW: 6E 00
+00000066 APDU: 00 B0 00 00 09
+00011429 SW: 6E 00
+```
